@@ -1,0 +1,1 @@
+{"version":3,"file":"vue.js","sources":["../src/index.ts"],"sourcesContent":["\nconsole.log('hello world')"],"names":[],"mappings":";;;CACA,OAAO,CAAC,GAAG,CAAC,aAAa;;;;;;"}
