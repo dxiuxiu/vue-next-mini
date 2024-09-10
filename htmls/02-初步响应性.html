@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>响应性</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // 赋值为 setter 行为，取值为 getter 行为
+  let product={
+    price:10,
+    quantity:2
+  }
+
+  const effect=()=>{
+    return product.price*product.quantity 
+  }
+  console.log('商品总价',effect() ) // 20
+  product.quantity=5
+  console.log('商品总价',effect())  // 50 每次 setter 后手动触发价格计算，如何自动触发呢
+</script>
+</html>

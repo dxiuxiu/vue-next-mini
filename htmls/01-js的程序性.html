@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>js程序性</title>
+</head>
+<body>
+  
+</body>
+<script>
+
+  let product={
+    price:10,
+    quantity:2
+  }
+  // 商品总价
+  let total = product.price*product.quantity
+  console.log('商品总价',total) // 20
+  // 修改商品价格
+  product.quantity=5
+  console.log('商品总价',total) // 20 - 还是 20 是因为 js 具备程序性，即一套固定的不会发生改变的执行顺序，如果想要商品数量变化商品总价也变化如何实现
+</script>
+</html>

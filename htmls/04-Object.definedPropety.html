@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  
+</body>
+
+<script>
+  // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+  // Object.defineProperty() 直接在一个对象上定义一个新属性，或修改其现有属性，并返回此对象。
+  // https://segmentfault.com/a/1190000007434923
+
+    // 赋值为 setter 行为，取值为 getter 行为
+  let quantity=2
+  let product={
+    price:10,
+    quantity
+  }
+  let total=0
+  const effect=()=>{
+    return product.price*product.quantity 
+  }
+
+  total=effect()
+  console.log('商品总价',total ) // 20
+
+  // Object.defineProperty() - vue2 响应性核心
+  Object.defineProperty(product,'quantity',{
+    set(value){
+      console.log('setter',value)
+      quantity=value
+      total=effect()
+    },
+    get(){
+      console.log('getter',product) 
+      return quantity
+    },
+  })
+</script>
+
+<!-- <script>
+  let product={
+    price:10,
+    quantity:2
+  }
+  let total=0
+  const effect=()=>{
+    return product.price*product.quantity 
+  }
+
+  total=effect()
+  console.log('商品总价',total ) // 20
+
+  // Object.defineProperty() - vue2 响应性核心
+  Object.defineProperty(product,'quantity',{
+    set(value){
+      console.log('setter',value)
+      // product.quantity=value // 循环 setter 导致堆栈溢出
+    },
+    get(){
+      console.log('getter') 
+      return 999
+    },
+  })
+</script> -->
+</html>
