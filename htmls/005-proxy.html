@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
+  let product={
+    price:10,
+    quantity:2
+  }
+  let total=0
+  const effect=()=>{
+    return product.price*product.quantity 
+  }
+
+  total=effect()
+  console.log('商品总价',total ) // 20
+
+  // 只有代理对象才能触发 get set
+  const proxyProduct=new Proxy(product,{
+    /**
+     * target - product
+     * key
+     * newValue
+     * receiver - proxyProduct
+    */
+    set(target,key,newValue,receiver){
+      // console.log('setter',target,key,newValue,receiver)
+      target[key]=newValue
+      // console.log('setter',target,key,newValue,receiver)
+
+      // total=effect()
+      return true
+    },
+    get(target,key,receiver){
+      console.log('getter',target,key,receiver)
+      return target[key]
+    }
+  })
+
+
+</script>
+</html>

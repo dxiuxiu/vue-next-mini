@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+<script>
+  // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
+
+  const p1={
+    firstName:'zhang',
+    lastName:'san',
+    get fullName(){
+      return this.firstName+this.lastName
+    }
+  }
+  const p2={
+    firstName:'li',
+    lastName:'si',
+    get fullName(){
+      return this.firstName+this.lastName
+    }
+  }
+
+  console.log(p1.fullName,p2.fullName)
+  console.log(Reflect.get(p1,'fullName'))
+  console.log(Reflect.get(p1,'fullName'),p2)
+</script>
+</html>

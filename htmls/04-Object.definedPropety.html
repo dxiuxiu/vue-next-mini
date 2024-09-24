@@ -68,4 +68,14 @@
     },
   })
 </script> -->
+
+<script>
+  // Object.defineProperty() - 缺陷
+  // vue2 不能检测数组和对象的变化
+  // 为对象新增一个没有在 data 中声明的属性时，新增的属性不是响应性的
+  // 因为 js 监听不到一个对象被添加属性这个行为而 Object.defineProperty() 是监听指定对象的指定属性
+  // 当为数组通过下标的形式新增一个元素时，新增的元素不是响应性的
+  // https://codesandbox.io/p/sandbox/vue2-demos-fqdpfx?file=%2Fsrc%2Fdemos%2Fvue2-bug.vue%3A45%2C37
+  
+</script>
 </html>
