@@ -9,12 +9,17 @@
   
 </body>
 <script>
+  // Reflect - 一个内置的对象 - 提供拦截 JavaScript 操作的方法
   // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Reflect
 
   const p1={
     firstName:'zhang',
     lastName:'san',
+    // get 修饰符用于定义对象的 getter 方法。这使得你能够通过访问属性的方式来计算和返回一个值，而不需要显式地调用方法。这个 getter 本质上是一个特殊的函数，当你访问该属性时，JavaScript 会自动执行这个函数并返回结果
     get fullName(){
+      return this.firstName+this.lastName
+    },
+    fullName2:function(){
       return this.firstName+this.lastName
     }
   }
@@ -23,11 +28,21 @@
     lastName:'si',
     get fullName(){
       return this.firstName+this.lastName
+    },
+    fullName2:function (){
+      return this.firstName+this.lastName
     }
   }
 
-  console.log(p1.fullName,p2.fullName)
-  console.log(Reflect.get(p1,'fullName'))
+  // console.log(p1.fullName,p2.fullName)
+  /**
+   * Reflect.get(target, propertyKey[, receiver])
+   * target[target]
+   * 
+   * 如果target对象中指定了getter，receiver则为getter调用时的this值。
+  */
+  // console.log(Reflect.get(p1,'fullName'))
   console.log(Reflect.get(p1,'fullName'),p2)
+  console.log(Reflect.get(p1,'fullName',p2),p2)
 </script>
 </html>

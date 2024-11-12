@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+</body>
+
+<script>
+  let count=0
+  const obj = {
+    count,
+    quality: 18
+  }
+  let total=0
+  function effect(){
+    total= obj.count*obj.quality
+    console.log('total',total)
+  }
+
+
+  // set 中不做值更新，获取 obj.count 会得到 undefined；get 中不做值返回时候，obj.count 会得到 undefined
+  Object.defineProperty(obj,'count',{
+    set:function(value){
+      count=value
+      effect()
+    },
+    get:function(){
+      return count
+      // return null
+    }
+
+
+    // set:(value)=>{
+    //   // console.log('set',value)
+    // },
+    // get:()=>{
+    //   console.log('get',this)
+    //   return this.count
+    //   // return null
+    // }
+  })
+</script>
+</html>

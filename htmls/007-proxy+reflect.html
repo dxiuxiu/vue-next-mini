@@ -13,24 +13,32 @@
     firstName:'zhang',
     lastName:'san',
     get fullName(){
-      console.log('p1 this',this)
+      // console.log('p1 this',this)
       return this.firstName+this.lastName
     }
   }
+
 
   const proxy=new Proxy(p1,{
     // set(target,key,newValue,receiver){
     //   target[key]=newValue
     //   return true
     // },
+    /**
+     * target - p1
+     * key
+     * newValue
+     * receiver - proxy
+    */
     get(target,key,receiver){
-      console.log('getter',target,key,receiver)
+      console.log('getter',target===receiver)
       // 期望监听代理对象的 getter setter 时，不应该使用 target[key] ，它在某些时候是不可靠的，应该使用 Reflect 的 get set 方法，使用 receiver 作为 this 来达到期望结果
-      // return target[key]
+      return target[key] // console 输出一次
       
-      return Reflect.get(target,key,receiver)
+      // return Reflect.get(target,key,receiver) // console 输出三次
     }
   })
-  console.log(proxy.fullName) // 思考：这里的输出只被触发一次吗？？
+  // console.log('p1.fullName',p1.fullName)
+  console.log('proxy.fullName',proxy.fullName) // 思考：这里的输出只被触发一次吗？？
 </script>
 </html>

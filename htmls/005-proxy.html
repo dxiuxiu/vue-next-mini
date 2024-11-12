@@ -9,6 +9,7 @@
   
 </body>
 <script>
+  // Proxy 对象 - 用于创建一个对象的代理，从而实现基本操作的拦截和自定义
   // https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Proxy
   let product={
     price:10,
@@ -31,12 +32,12 @@
      * receiver - proxyProduct
     */
     set(target,key,newValue,receiver){
-      // console.log('setter',target,key,newValue,receiver)
+      console.log('setter',target,key,newValue,receiver)
       target[key]=newValue
       // console.log('setter',target,key,newValue,receiver)
 
-      // total=effect()
-      return true
+      total=effect()
+      // return true
     },
     get(target,key,receiver){
       console.log('getter',target,key,receiver)

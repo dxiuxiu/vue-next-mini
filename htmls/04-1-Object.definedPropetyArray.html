@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  
+</body>
+
+
+<script>
+
+  // Object.defineProperty 不能监听数组 - vue2 对数组操作可以触发视图更新的原因 https://segmentfault.com/a/1190000042069667
+  let array=['1','2','3']
+  let result=0
+  const effect=()=>{
+    return array 
+  }
+
+  result=effect()
+  console.log('监听数组变化',result ) // 20
+
+  Object.defineProperty(array,'1',{
+    set(value){
+      console.log('setter',value)
+      quantity=value
+      total=effect()
+    },
+    get(){
+      console.log('getter',product) 
+      return quantity
+    },
+  })
+</script>
+
+
+<script>
+  // Object.defineProperty() - 缺陷不能检测数组和对象的变化
+</script>
+</html>

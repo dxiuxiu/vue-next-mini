@@ -28,13 +28,14 @@
   console.log('商品总价',total ) // 20
 
   // Object.defineProperty() - vue2 响应性核心
+  // 缺点：不能检测数组和对象的变化
   Object.defineProperty(product,'quantity',{
     set(value){
       // total=effect()
       console.log('setter',value)
     },
     get(){
-      console.log('getter',product.quantity) 
+      console.log('getter') 
     },
   })
 </script>
