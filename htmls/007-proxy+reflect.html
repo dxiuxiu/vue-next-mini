@@ -33,12 +33,17 @@
     get(target,key,receiver){
       console.log('getter',target===receiver)
       // 期望监听代理对象的 getter setter 时，不应该使用 target[key] ，它在某些时候是不可靠的，应该使用 Reflect 的 get set 方法，使用 receiver 作为 this 来达到期望结果
-      return target[key] // console 输出一次
+      // return target[key] // console 输出一次
       
-      // return Reflect.get(target,key,receiver) // console 输出三次
+      return Reflect.get(target,key,receiver) // console 输出三次
     }
   })
-  // console.log('p1.fullName',p1.fullName)
-  console.log('proxy.fullName',proxy.fullName) // 思考：这里的输出只被触发一次吗？？
+  // console.log('p1.fullName',p1.fullName) // 当 get return target[key] 时没有触发 get 的console,因为 get 仅在 proxy 变化时触发
+  /**
+   * 1、当 get return target[key] 时,触发一次 get 的 console,这是因为 proxy 中的 get 仅在读取 proxy 上的属性时被触发
+   * 但 proxy fullName 属性中的 this 此时指向的是 target 即 p1 对象所以不能触发 proxy 的 get 方法
+   * 2、当 get return Reflect.get(target,key,receiver) 指定了 get 方法中的 this 指向 proxy 对象此时两次 this. 实际上是 proxy. 故可以触发 proxy 中 get
+  */
+  console.log('proxy.fullName',proxy.fullName) // 
 </script>
 </html>
