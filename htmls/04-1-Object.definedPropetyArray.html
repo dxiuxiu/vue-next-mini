@@ -17,12 +17,37 @@
   let array=['1','2','3']
   let result=0
   const effect=()=>{
+    console.log('effect')
     return array 
   }
+
+  let quantity='1111'
 
   result=effect()
   console.log('监听数组变化',result ) // 20
 
+  /**
+   * 相关参考
+   * https://blog.csdn.net/XH_jing/article/details/120413904
+   * https://segmentfault.com/a/1190000040238233
+   * 数组的索引（即数组的键）在底层是以字符串形式存储的。这意味着数组的索引虽然看起来像数字，但实际上 JavaScript 会将它们转换为字符串
+   * console.log(Object.keys(array))
+   * 为什么数组的键是字符串?
+   * JavaScript 的数组是基于对象的，因此数组的每个元素都可以看作是对象的属性，而对象的属性名总是被当作字符串处理的。数组的数字索引也遵循这个规则，尽管它们看起来是数字
+   * 数组索引是字符串但是可以通过 array[1] 访问的原因
+   * 尽管数组的键是字符串，但 JavaScript 对数组进行了优化，允许通过整数索引来访问元素，这也是我们通常所说的“数组”。当我们用整数来访问数组时，JavaScript 会将这个整数自动转换为字符串（例如 arr[0] 实际上是访问 arr['0']）。这让我们在使用数组时仍然觉得它的索引是数字。
+   * 
+   * vue2 响应式 demo 
+   * https://codesandbox.io/p/sandbox/vue2-demos-fqdpfx?file=%2Fsrc%2Fdemos%2Fvue2-bug.vue%3A42%2C39
+   * 
+   * Object.defineProperty 本身能做到数组监听但是 vue2 为什么没有用提供这一功能，使得arr[已有元素下标]变成响应式
+   * https://github.com/vuejs/vue/issues/8562
+   * 
+   * vue2 中数组响应性的实现
+   * vue2 - 响应性原理 https://juejin.cn/post/6876000508034285576
+   * vue2.x响应式原理-数组篇 https://juejin.cn/post/6975531993152897032
+   * 
+  */
   Object.defineProperty(array,'1',{
     set(value){
       console.log('setter',value)
@@ -30,7 +55,6 @@
       total=effect()
     },
     get(){
-      console.log('getter',product) 
       return quantity
     },
   })

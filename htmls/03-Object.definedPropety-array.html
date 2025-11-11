@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  
+</body>
+<script>
+
+  // 赋值为 setter 行为，取值为 getter 行为
+  let product=[]
+  let res=''
+  const effect=()=>{
+    console.log('effect')
+    return product.reduce((acc,currentValue)=>{
+      return `${acc}-${currentValue}`
+    },'') 
+  }
+
+  res=effect()
+  console.log('res',res ) // 20
+
+  
+function defineReactive(data, key, value) {
+	 Object.defineProperty(data, key, {
+		 enumerable: true,
+		 configurable: true,
+		 get: function defineGet() {
+			 console.log(`get key: ${key} value: ${value}`)
+			 return value
+		 },
+		 set: function defineSet(newVal) {
+			 console.log(`set key: ${key} value: ${newVal}`)
+			 value = newVal
+		 }
+	 })
+}
+ 
+function observe(data) {
+	Object.keys(data).forEach(function(key) {
+		defineReactive(data, key, data[key])
+	})
+}
+ 
+let arr = [1, 2, 3]
+observe(arr)
+
+
+  // Object.defineProperty() - vue2 响应性核心
+  // 缺点：不能检测数组变化
+  Object.defineProperty(product,'quantity',{
+    set(value){
+      total=effect()
+      console.log('setter',value)
+      return value
+    },
+    get(){
+      console.log('getter') 
+      return product[]
+    },
+  })
+</script>
+</html>
